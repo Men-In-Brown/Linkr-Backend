@@ -1,5 +1,6 @@
 package com.nighthawk.spring_portfolio.controllers.Linkr;
 
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
