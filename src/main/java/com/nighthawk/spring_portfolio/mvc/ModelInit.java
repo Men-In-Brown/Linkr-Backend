@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nighthawk.spring_portfolio.mvc.jokes.Jokes;
 import com.nighthawk.spring_portfolio.mvc.jokes.JokesJpaRepository;
-import com.nighthawk.spring_portfolio.mvc.note.Note;
-import com.nighthawk.spring_portfolio.mvc.note.NoteJpaRepository;
-import com.nighthawk.spring_portfolio.mvc.person.Person;
-import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
+import com.nighthawk.spring_portfolio.mvc.linkr.Company;
+import com.nighthawk.spring_portfolio.mvc.linkr.CompanyJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.linkr.LinkrUser;
+
 
 import java.util.List;
 
@@ -19,8 +19,7 @@ import java.util.List;
 @Configuration // Scans Application for ModelInit Bean, this detects CommandLineRunner
 public class ModelInit {  
     @Autowired JokesJpaRepository jokesRepo;
-    @Autowired NoteJpaRepository noteRepo;
-    @Autowired PersonDetailsService personService;
+    @Autowired CompanyJpaRepository companyRepository;
 
     @Bean
     CommandLineRunner run() {  // The run() method will be executed after the application starts
@@ -34,20 +33,14 @@ public class ModelInit {
                     jokesRepo.save(new Jokes(null, joke, 0, 0)); //JPA save
             }
 
-            // Person database is populated with test data
-            Person[] personArray = Person.init();
-            for (Person person : personArray) {
-                //findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase
-                List<Person> personFound = personService.list(person.getName(), person.getEmail());  // lookup
-                if (personFound.size() == 0) {
-                    personService.save(person);  // save
+            // Company and User initialization logic
+            Company company = new Company();
+            company.setName("Example Company");
+            // Set other fields...
 
-                    // Each "test person" starts with a "test note"
-                    String text = "Test " + person.getEmail();
-                    Note n = new Note(text, person);  // constructor uses new person as Many-to-One association
-                    noteRepo.save(n);  // JPA Save                  
-                }
-            }
+            LinkrUser user = new LinkrUser();
+            user.setUsername("Example User");
+            user.setCompany(company);
 
         };
     }
