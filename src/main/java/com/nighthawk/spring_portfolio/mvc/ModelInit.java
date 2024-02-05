@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nighthawk.spring_portfolio.mvc.jokes.Jokes;
 import com.nighthawk.spring_portfolio.mvc.jokes.JokesJpaRepository;
-import com.nighthawk.spring_portfolio.mvc.linkr.Company;
-import com.nighthawk.spring_portfolio.mvc.linkr.CompanyJpaRepository;
-import com.nighthawk.spring_portfolio.mvc.linkr.LinkrUser;
+import com.nighthawk.spring_portfolio.mvc.linkr2.Company;
+import com.nighthawk.spring_portfolio.mvc.linkr2.CompanyJpaRepository;
+
 
 
 import java.util.List;
@@ -33,14 +33,9 @@ public class ModelInit {
                     jokesRepo.save(new Jokes(null, joke, 0, 0)); //JPA save
             }
 
-            // Company and User initialization logic
-            Company company = new Company();
-            company.setName("Example Company");
-            // Set other fields...
 
-            LinkrUser user = new LinkrUser();
-            user.setUsername("Example User");
-            user.setCompany(company);
+            
+            
 
         };
     }
