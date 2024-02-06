@@ -12,7 +12,7 @@ import java.util.*;
 import java.text.SimpleDateFormat;
 
 @RestController
-@RequestMapping("/api/person")
+@RequestMapping("/api/company")
 public class CompanyAPIController {
     //     @Autowired
     // private JwtTokenUtil jwtGen;

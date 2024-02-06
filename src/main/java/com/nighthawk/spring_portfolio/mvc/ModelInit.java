@@ -10,8 +10,8 @@ import com.nighthawk.spring_portfolio.mvc.jokes.Jokes;
 import com.nighthawk.spring_portfolio.mvc.jokes.JokesJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.linkr2.Company;
 import com.nighthawk.spring_portfolio.mvc.linkr2.CompanyJpaRepository;
-
-
+import com.nighthawk.spring_portfolio.mvc.linkr2.LinkrUser;
+import com.nighthawk.spring_portfolio.mvc.linkr2.LinkrUserJpaRepository;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ import java.util.List;
 public class ModelInit {  
     @Autowired JokesJpaRepository jokesRepo;
     @Autowired CompanyJpaRepository companyRepository;
+    @Autowired LinkrUserJpaRepository linkrRepo;
 
     @Bean
     CommandLineRunner run() {  // The run() method will be executed after the application starts
@@ -33,10 +34,19 @@ public class ModelInit {
                     jokesRepo.save(new Jokes(null, joke, 0, 0)); //JPA save
             }
 
-
+            Company[] companyList = Company.init();
+            for (Company c : companyList){
+                List<Company> foundCompanies = companyRepository.findAllByNameIgnoreCase(c.getName());
+                if (foundCompanies.size() == 0){
+                    companyRepository.save(c);
+                }           
+            }
             
-            
+            LinkrUser[] linkrUsers = LinkrUser.initLinkrUsers();
+            for (LinkrUser l : linkrUsers){
 
+            }
+        
         };
     }
 }

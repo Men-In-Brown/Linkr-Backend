@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CompanyJpaRepository extends JpaRepository<Company, Long> {
+public interface LinkrUserJpaRepository extends JpaRepository<LinkrUser, Long> {
 
     // Updated method to fix the issue
     Company findByName(String name);
