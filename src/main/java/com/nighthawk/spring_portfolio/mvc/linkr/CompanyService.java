@@ -16,8 +16,8 @@ public class CompanyService {
     }
 
     public List<Company> getAllCompanies() {
-        return companyRepository.findAllById(1);
-    }
+        return companyRepository.findAll();
+    }    
 
     public Optional<Company> getCompanyById(Long companyId) {
         return companyRepository.findById(companyId);

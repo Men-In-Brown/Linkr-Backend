@@ -30,10 +30,6 @@ public class CompanyController {
         List<CompanyDTO> companyDTOs = companies.stream()
                 .map(company -> modelMapper.map(company, CompanyDTO.class))
                 .collect(Collectors.toList());
-
-        // Log the number of companies retrieved
-        log.info("Retrieved {} companies", companyDTOs.size());
-
         return new ResponseEntity<>(companyDTOs, HttpStatus.OK);
     }
 
