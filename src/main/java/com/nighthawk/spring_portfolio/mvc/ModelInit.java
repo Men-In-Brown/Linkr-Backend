@@ -4,14 +4,18 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nighthawk.spring_portfolio.mvc.jokes.Jokes;
 import com.nighthawk.spring_portfolio.mvc.jokes.JokesJpaRepository;
-import com.nighthawk.spring_portfolio.mvc.note.Note;
-import com.nighthawk.spring_portfolio.mvc.note.NoteJpaRepository;
-import com.nighthawk.spring_portfolio.mvc.person.Person;
-import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
+import com.nighthawk.spring_portfolio.mvc.linkr.Company;
+import com.nighthawk.spring_portfolio.mvc.linkr.CompanyRepository;
+import com.nighthawk.spring_portfolio.mvc.linkr.CompanyService;
+import com.nighthawk.spring_portfolio.mvc.linkr.Employee;
+import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeController;
+import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeRepository;
+import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeService;
 
 import java.util.List;
 
@@ -19,8 +23,8 @@ import java.util.List;
 @Configuration // Scans Application for ModelInit Bean, this detects CommandLineRunner
 public class ModelInit {  
     @Autowired JokesJpaRepository jokesRepo;
-    @Autowired NoteJpaRepository noteRepo;
-    @Autowired PersonDetailsService personService;
+    @Autowired EmployeeRepository employeeRepository;
+    @Autowired CompanyRepository companyRepository;
 
     @Bean
     CommandLineRunner run() {  // The run() method will be executed after the application starts
@@ -34,22 +38,26 @@ public class ModelInit {
                     jokesRepo.save(new Jokes(null, joke, 0, 0)); //JPA save
             }
 
-            // Person database is populated with test data
-            Person[] personArray = Person.init();
-            for (Person person : personArray) {
-                //findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase
-                List<Person> personFound = personService.list(person.getName(), person.getEmail());  // lookup
-                if (personFound.size() == 0) {
-                    personService.save(person);  // save
-
-                    // Each "test person" starts with a "test note"
-                    String text = "Test " + person.getEmail();
-                    Note n = new Note(text, person);  // constructor uses new person as Many-to-One association
-                    noteRepo.save(n);  // JPA Save                  
+            Company[] clist = Company.companyInit();
+            for (Company c : clist){
+                if(c.getId() == null){
+                    c.setId(companyRepository.getMaxId() + 1);
                 }
+
+                companyRepository.save(c);
             }
 
+            Employee[] elist = Employee.EmployeeInit();
+            for (Employee e : elist){
+                if(e.getId() == null){
+                    e.setId(employeeRepository.getMaxId() + 1);
+                }
+                List<Employee> foundEmails = employeeRepository.findAllByEmail(e.getEmail());
+                if(foundEmails.size() == 0){
+                    employeeRepository.save(e);
+                }
+            }
+        
         };
     }
 }
-

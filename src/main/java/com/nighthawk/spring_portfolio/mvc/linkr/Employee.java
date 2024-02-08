@@ -1,0 +1,51 @@
+package com.nighthawk.spring_portfolio.mvc.linkr;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "employee")
+public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String position;
+    private String email;
+    private String password;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
+
+
+    public Employee(String name, String position, String email, String password){
+        this.name = name;
+        this.position = position;
+        this.email = email;
+        this.password = password;
+    }
+
+    public static Employee[] EmployeeInit(){
+        Employee e1 = new Employee("Tanay", "CEO", "tpatel@gmail.com", "123Tanay!");
+        Employee e2 = new Employee("Varaprasad", "CTO", "vnibhanupudi@gmail.com", "123Vlu!");
+        Employee e3 = new Employee("Paaras", "CFO", "ppurohit@gmail.com", "123Paras!");
+
+        Employee[] elist =  {e1, e2, e3};
+        return elist;
+    }
+}
