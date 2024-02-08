@@ -17,11 +17,12 @@ public class PATTask {
         List<LinkrPAT> pats = PATRepo.findAll();
         for(LinkrPAT p : pats){
             p.setPAT(generateUniqueToken(6));
-            System.out.println(p.getPAT());
+            PATRepo.save(p);
         }
+        System.out.println("executed");
     }
 
-    public static String generateUniqueToken(int length) {
+    public String generateUniqueToken(int length) {
         SecureRandom secureRandom = new SecureRandom();
         byte[] randomBytes = new byte[length / 2];
         secureRandom.nextBytes(randomBytes);

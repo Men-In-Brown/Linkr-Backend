@@ -24,7 +24,7 @@ public class LinkrPAT {
 
     public LinkrPAT(){
         this.creation = new Date();
-        this.PAT = "";
+        this.PAT = "Hello";
     }
 
     public void setPAT(String _PAT){
@@ -35,5 +35,9 @@ public class LinkrPAT {
         return this.PAT;
     }
     
+    public static LinkrPAT[] init(){
+        LinkrPAT[] list = {new LinkrPAT(), new LinkrPAT(), new LinkrPAT()};
+        return list;
+    }
     
 }
