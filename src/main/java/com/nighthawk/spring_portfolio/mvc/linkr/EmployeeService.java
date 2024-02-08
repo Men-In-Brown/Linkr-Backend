@@ -24,10 +24,18 @@ public class EmployeeService {
     }
 
     public Employee createEmployee(Employee employee) {
+        if(employee.getId() == null){
+            employee.setId(generateNextId());
+        }
         return employeeRepository.save(employee);
     }
 
     public void deleteEmployee(Long employeeId) {
         employeeRepository.deleteById(employeeId);
+    }
+
+    private Long generateNextId() {
+        // generate the next id, again, it should be changed to be more secure
+        return employeeRepository.getMaxId() + 1; 
     }
 }

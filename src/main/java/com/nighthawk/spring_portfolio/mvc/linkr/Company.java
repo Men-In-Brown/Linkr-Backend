@@ -32,4 +32,13 @@ public class Company {
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Employee> employees = new HashSet<>();
+
+
+    public static Company[] companyInit(){
+        Company c1 = new Company();
+        Company c2 = new Company();
+        Company c3 = new Company();
+        Company[] clist = {c1, c2, c3};
+        return clist;
+    }
 }

@@ -24,10 +24,19 @@ public class CompanyService {
     }
 
     public Company createCompany(Company company) {
+        
+        if(company.getId() == null){
+            company.setId(generateNextId());
+        }
         return companyRepository.save(company);
     }
 
     public void deleteCompany(Long companyId) {
         companyRepository.deleteById(companyId);
+    }
+
+    private Long generateNextId() {
+        // generate the next id, again, it should be changed to be more secure
+        return companyRepository.getMaxId() + 1; 
     }
 }

@@ -1,7 +1,16 @@
 package com.nighthawk.spring_portfolio.mvc.linkr;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-    // add stuff for searching employees
+    List<Employee> findAllById(Long id);
+
+    @Query(value = "SELECT coalesce(max(id), 0) FROM Employee")
+     Long getMaxId();
+
 }

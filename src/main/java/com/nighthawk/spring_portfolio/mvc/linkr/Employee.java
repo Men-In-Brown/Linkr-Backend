@@ -8,10 +8,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "employee")
 public class Employee {
 
@@ -26,4 +30,13 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
+
+    public static Employee[] EmployeeInit(){
+        Employee e1 = new Employee();
+        Employee e2 = new Employee();
+        Employee e3 = new Employee();
+
+        Employee[] elist =  {e1, e2, e3};
+        return elist;
+    }
 }
