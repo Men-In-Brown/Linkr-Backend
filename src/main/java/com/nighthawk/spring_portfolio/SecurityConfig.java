@@ -72,6 +72,7 @@ public class SecurityConfig {
 					.requestMatchers("/authenticate").permitAll()
 					.requestMatchers("/mvc/person/update/**", "/mvc/person/delete/**").authenticated()
 					.requestMatchers("/api/person/post/**", "/api/person/delete/**").authenticated()
+					.requestMatchers("api/users/**").authenticated()
 					.requestMatchers("/**").permitAll()
 				)
 				// support cors
@@ -85,7 +86,7 @@ public class SecurityConfig {
 					//.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "https://nighthawkcoders.github.io", "http://localhost:4000"))
 				)
 				.formLogin(form -> form 
-					.loginPage("/login")
+					.loginPage("/linkrLogin")
 				)
 				.logout(logout -> logout
 					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

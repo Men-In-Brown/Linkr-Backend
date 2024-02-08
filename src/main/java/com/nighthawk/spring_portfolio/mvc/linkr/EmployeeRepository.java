@@ -16,4 +16,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query(value = "SELECT coalesce(max(id), 0) FROM Employee")
      Long getMaxId();
 
+    Employee findByEmail(String email);
+
+    List<Employee> findAllByEmail(String email);
+
 }

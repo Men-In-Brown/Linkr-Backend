@@ -52,8 +52,10 @@ public class ModelInit {
                 if(e.getId() == null){
                     e.setId(employeeRepository.getMaxId() + 1);
                 }
-
-                employeeRepository.save(e);
+                List<Employee> foundEmails = employeeRepository.findAllByEmail(e.getEmail());
+                if(foundEmails.size() == 0){
+                    employeeRepository.save(e);
+                }
             }
         
         };
