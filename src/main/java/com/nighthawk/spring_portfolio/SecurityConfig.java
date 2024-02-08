@@ -30,7 +30,8 @@ import org.springframework.security.web.header.writers.StaticHeadersWriter;
 @Configuration
 @EnableWebSecurity  // Beans to enable basic Web security
 @EnableMethodSecurity(prePostEnabled = true)
-public class SecurityConfig {
+public class SecurityConfig
+{
 
     @Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
