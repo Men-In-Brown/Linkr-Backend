@@ -7,8 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface CompanyRepository extends JpaRepository<Company, Long> {
-    
-    List<Company> findAllById(Long id);
+
+    List<Company> findAll();
+
+    List<Company> findAllById(long i);
 
     @Query(value = "SELECT coalesce(max(id), 0) FROM Company")
      Long getMaxId();
