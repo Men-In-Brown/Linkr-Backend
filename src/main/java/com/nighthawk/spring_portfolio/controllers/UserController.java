@@ -1,30 +1,29 @@
-// package com.nighthawk.spring_portfolio.controllers;
+package com.nighthawk.spring_portfolio.controllers;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.web.bind.annotation.*;
-// import com.nighthawk.spring_portfolio.mvc.linkr.LinkrUser;
-// import com.nighthawk.spring_portfolio.mvc.linkr.UserLinkrService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-// import java.util.Optional;
+import com.nighthawk.spring_portfolio.mvc.linkr.CompanyRepository;
+import com.nighthawk.spring_portfolio.mvc.linkr.Employee;
+import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeRepository;
 
-// @RestController
-// @RequestMapping("/api/users")
-// public class UserController {
-//     @Autowired
-//     private UserLinkrService userService;
+import org.springframework.ui.Model;
 
-//     @PostMapping
-//     public LinkrUser saveUser(@RequestBody LinkrUser user) {
-//         return userService.saveUser(user);
-//     }
+import java.util.List;
+import java.util.Optional;
 
-//     @GetMapping("/{userId}")
-//     public Optional<LinkrUser> getUserById(@PathVariable Long userId) {
-//         return userService.getUserById(userId);
-//     }
+@Controller
 
-//     @DeleteMapping("/{userId}")
-//     public void deleteUser(@PathVariable Long userId) {
-//         userService.deleteUser(userId);
-//     }
-// }
+public class UserController {
+    @Autowired
+    EmployeeRepository employeeRepository;
+
+    @GetMapping("/api/users")
+    public String UsersAPI(Model model){
+        List<Employee> allEmployees = employeeRepository.findAll();
+        model.addAttribute("employees", allEmployees);
+        
+        return "linkradmin";
+    }
+}
