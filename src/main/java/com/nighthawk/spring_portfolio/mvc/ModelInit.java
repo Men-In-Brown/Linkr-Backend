@@ -54,7 +54,10 @@ public class ModelInit {
 
             LinkrPAT[] list = LinkrPAT.init();
             for(LinkrPAT l : list){
-                patRepo.save(l);
+                List<LinkrPAT> found = patRepo.findAllByUser(l.getUser());
+                if(found.size() == 0){
+                    patRepo.save(l);
+                }
             }
 
         };

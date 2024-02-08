@@ -11,6 +11,7 @@ import jakarta.persistence.TemporalType;
 import lombok.NoArgsConstructor;
 
 @Entity
+@NoArgsConstructor
 @Table
 public class LinkrPAT {
 
@@ -19,12 +20,14 @@ public class LinkrPAT {
     private Date creation; 
     
     private String PAT;
+    private String user;
 
     //private Employee attachedUser;
 
-    public LinkrPAT(){
+    public LinkrPAT(String attachedUser){
         this.creation = new Date();
         this.PAT = "Hello";
+        this.user = attachedUser;
     }
 
     public void setPAT(String _PAT){
@@ -34,9 +37,20 @@ public class LinkrPAT {
     public String getPAT() {
         return this.PAT;
     }
+
+    public String getUser(){
+        return this.user;
+    }
+
+    public Date getDate(){
+        return this.creation;
+    }
     
     public static LinkrPAT[] init(){
-        LinkrPAT[] list = {new LinkrPAT(), new LinkrPAT(), new LinkrPAT()};
+        LinkrPAT l1 = new LinkrPAT("Varalu");
+        LinkrPAT l2 = new LinkrPAT("Paaras");
+        LinkrPAT l3 = new LinkrPAT("Tanay");
+        LinkrPAT[] list = {l1, l2, l3};
         return list;
     }
     

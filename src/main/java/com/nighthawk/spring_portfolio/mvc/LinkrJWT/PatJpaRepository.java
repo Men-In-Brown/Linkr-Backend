@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface PatJpaRepository extends JpaRepository<LinkrPAT, Long> {
 
 
+    List<LinkrPAT> findAllByUser(String user);
     List<LinkrPAT> findAll();
 
 }
