@@ -171,12 +171,12 @@ public class Person {
         }
 
         Person p7 = new Person();
-        p6.setName("Varaprasad Nibhanupudi");
-        p6.setEmail("vnibhanupudi@gmail.com");
-        p6.setPassword("123Vlu!");
+        p7.setName("Varaprasad Nibhanupudi");
+        p7.setEmail("vnibhanupudi@gmail.com");
+        p7.setPassword("123Vlu!");
         try {
             Date d = new SimpleDateFormat("MM-dd-yyyy").parse("12-10-2000");
-            p6.setDob(d);
+            p7.setDob(d);
         } catch (Exception e) {
         }
 

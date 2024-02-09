@@ -44,6 +44,7 @@ public class JwtApiController {
 			.sameSite("None; Secure")
 			// .domain("example.com") // Set to backend domain
 			.build();
+			System.out.println("returning!");
 		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, tokenCookie.toString()).build();
 	}
 
