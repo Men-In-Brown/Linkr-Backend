@@ -103,6 +103,7 @@ public class Person {
         return -1;
     }
 
+
     // Initialize static test data 
     public static Person[] init() {
 
@@ -154,13 +155,33 @@ public class Person {
         p5.setEmail("jm1021@gmail.com");
         p5.setPassword("123Qwerty!");
         try {
-            Date d = new SimpleDateFormat("MM-dd-yyyy").parse("10-21-1959");
+            Date d = new SimpleDateFormat("MM-dd-yyyy").parse("06-10-2007");
             p5.setDob(d);
         } catch (Exception e) {
         }
 
+        Person p6 = new Person();
+        p6.setName("Tanay Patel");
+        p6.setEmail("tpatel@gmail.com");
+        p6.setPassword("123Tanay!");
+        try {
+            Date d = new SimpleDateFormat("MM-dd-yyyy").parse("05-15-2007");
+            p6.setDob(d);
+        } catch (Exception e) {
+        }
+
+        Person p7 = new Person();
+        p6.setName("Varaprasad Nibhanupudi");
+        p6.setEmail("vnibhanupudi@gmail.com");
+        p6.setPassword("123Vlu!");
+        try {
+            Date d = new SimpleDateFormat("MM-dd-yyyy").parse("12-10-2000");
+            p6.setDob(d);
+        } catch (Exception e) {
+        }
+
         // Array definition and data initialization
-        Person persons[] = {p1, p2, p3, p4, p5};
+        Person persons[] = {p1, p2, p3, p4, p5, p6, p7};
         return(persons);
     }
 
