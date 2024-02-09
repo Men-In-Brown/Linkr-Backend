@@ -19,12 +19,23 @@ public class CompaniesController {
     @Autowired
     CompanyRepository companyRepository;
 
-    @GetMapping("/api/controllers")
+    @GetMapping("/api/compList")
     public String UsersAPI(Model model){
         List<Company> allEmployees = companyRepository.findAll();
         System.out.println(allEmployees.size());
-        model.addAttribute("employees", allEmployees);
+        model.addAttribute("companies", allEmployees);
         
+        return "linkrcompanies";
+    }
+
+    @PostMapping("/deleteCompany")
+    public String deleteCompany(@RequestParam(name="id") long id, Model model){
+        System.out.println("WE DOING SHIT");
+        companyRepository.deleteById(id);
+        List<Company> allEmployees = companyRepository.findAll();
+        System.out.println(allEmployees.size());
+        model.addAttribute("companies", allEmployees);
+
         return "linkrcompanies";
     }
 }
