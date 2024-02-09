@@ -30,7 +30,8 @@ import org.springframework.security.web.header.writers.StaticHeadersWriter;
 @Configuration
 @EnableWebSecurity  // Beans to enable basic Web security
 @EnableMethodSecurity(prePostEnabled = true)
-public class SecurityConfig {
+public class SecurityConfig
+{
 
     @Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -72,6 +73,7 @@ public class SecurityConfig {
 					.requestMatchers("/authenticate").permitAll()
 					.requestMatchers("/mvc/person/update/**", "/mvc/person/delete/**").authenticated()
 					.requestMatchers("/api/person/post/**", "/api/person/delete/**").authenticated()
+					.requestMatchers("api/users/**").authenticated()
 					.requestMatchers("/**").permitAll()
 				)
 				// support cors
@@ -85,7 +87,7 @@ public class SecurityConfig {
 					//.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "https://nighthawkcoders.github.io", "http://localhost:4000"))
 				)
 				.formLogin(form -> form 
-					.loginPage("/login")
+					.loginPage("/linkrLogin")
 				)
 				.logout(logout -> logout
 					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
