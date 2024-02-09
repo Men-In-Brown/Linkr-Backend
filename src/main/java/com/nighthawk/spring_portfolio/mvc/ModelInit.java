@@ -47,8 +47,10 @@ public class ModelInit {
                 if(c.getId() == null){
                     c.setId(companyRepository.getMaxId() + 1);
                 }
-
-                companyRepository.save(c);
+                List<Company> found = companyRepository.findCompanyByNameIgnoreCase(c.getName());
+                if (found.size() == 0){
+                    companyRepository.save(c);
+                }
             }
 
             Employee[] elist = Employee.EmployeeInit();
