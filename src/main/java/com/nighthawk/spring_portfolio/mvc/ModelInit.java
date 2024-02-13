@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.nighthawk.spring_portfolio.mvc.LinkrJWT.LinkrPAT;
+import com.nighthawk.spring_portfolio.mvc.LinkrJWT.PatJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.jokes.Jokes;
 import com.nighthawk.spring_portfolio.mvc.jokes.JokesJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.linkr.Company;
@@ -28,6 +30,9 @@ import java.util.List;
 @Configuration // Scans Application for ModelInit Bean, this detects CommandLineRunner
 public class ModelInit {  
     @Autowired JokesJpaRepository jokesRepo;
+    @Autowired NoteJpaRepository noteRepo;
+    @Autowired PersonDetailsService personService;
+    @Autowired PatJpaRepository patRepo;
     @Autowired EmployeeRepository employeeRepository;
     @Autowired CompanyRepository companyRepository;
     @Autowired PersonDetailsService personService;
@@ -85,6 +90,15 @@ public class ModelInit {
                 }
             }
         
+
+            LinkrPAT[] list = LinkrPAT.init();
+            for(LinkrPAT l : list){
+                List<LinkrPAT> found = patRepo.findAllByUser(l.getUser());
+                if(found.size() == 0){
+                    patRepo.save(l);
+                }
+            }
+
         };
     }
 }

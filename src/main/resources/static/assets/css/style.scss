@@ -42,16 +42,16 @@ $theme-colors: (
 */
 
 // redefine colors
-$primary: #a1a9bd;
-$secondary: #5B9D82;
-$body-bg: #cfd8dc;
+$primary: #0048ff;
+$secondary: #000000;
+$body-bg: #00b3ff;
 
 // redefine body background
 @import "../../../../../node_modules/bootstrap/scss/bootstrap";
 
 // setup default background
 html, body {
-  background-image: var(--bs-gradient);
+  background-image: var(--bs-red);
   background-color: var(--bs-body-bg);
 }
 
