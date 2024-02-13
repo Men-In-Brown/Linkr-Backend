@@ -10,7 +10,7 @@
 
 <body>
     <th:block layout:fragment="body" th:remove="tag">
-        <div th:each="p : ${pat}">
+        <div th:each="p : ${PATS}">
             <p th:text="${p.PAT}"></p>
         </div>
 

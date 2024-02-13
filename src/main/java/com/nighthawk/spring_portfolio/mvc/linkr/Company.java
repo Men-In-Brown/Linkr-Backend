@@ -33,6 +33,7 @@ public class Company {
     private String website; // set to null, can be replaced
     private int foundedYear; // automated
     private String ceo; // automated (employee creating company)
+    // private int investments;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Employee> employees = new HashSet<>();

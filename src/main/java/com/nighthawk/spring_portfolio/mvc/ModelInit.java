@@ -18,6 +18,11 @@ import com.nighthawk.spring_portfolio.mvc.linkr.Employee;
 import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeController;
 import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeRepository;
 import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeService;
+import com.nighthawk.spring_portfolio.mvc.linkrAuthentication.LinkrPAT;
+import com.nighthawk.spring_portfolio.mvc.linkrAuthentication.PatJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.note.Note;
+import com.nighthawk.spring_portfolio.mvc.person.Person;
+import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
 
 import java.util.List;
 
@@ -30,6 +35,8 @@ public class ModelInit {
     @Autowired PatJpaRepository patRepo;
     @Autowired EmployeeRepository employeeRepository;
     @Autowired CompanyRepository companyRepository;
+    @Autowired PersonDetailsService personService;
+    @Autowired PatJpaRepository patRepo;
 
     @Bean
     CommandLineRunner run() {  // The run() method will be executed after the application starts
@@ -60,6 +67,24 @@ public class ModelInit {
                 List<Employee> foundEmails = employeeRepository.findAllByEmail(e.getEmail());
                 if(foundEmails.size() == 0){
                     employeeRepository.save(e);
+                }
+            }
+
+            // Person database is populated with test data
+            Person[] personArray = Person.init();
+            for (Person person : personArray) {
+                //findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase
+                List<Person> personFound = personService.list(person.getName(), person.getEmail());  // lookup
+                if (personFound.size() == 0) {
+                    personService.save(person);  // save
+                }
+            }
+
+            LinkrPAT[] list = LinkrPAT.init();
+            for(LinkrPAT l : list){
+                List<LinkrPAT> found = patRepo.findAllByUser(l.getUser());
+                if(found.size() == 0){
+                    patRepo.save(l);
                 }
             }
         
