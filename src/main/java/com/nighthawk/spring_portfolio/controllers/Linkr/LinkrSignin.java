@@ -9,8 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.nighthawk.spring_portfolio.mvc.LinkrJWT.LinkrPAT;
-import com.nighthawk.spring_portfolio.mvc.LinkrJWT.PatJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.linkrAuthentication.LinkrPAT;
+import com.nighthawk.spring_portfolio.mvc.linkrAuthentication.PatJpaRepository;
 
 
 @Controller

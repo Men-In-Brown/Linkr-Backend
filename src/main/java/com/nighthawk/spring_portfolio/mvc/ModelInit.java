@@ -6,9 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.nighthawk.spring_portfolio.mvc.LinkrJWT.LinkrPAT;
-import com.nighthawk.spring_portfolio.mvc.LinkrJWT.PatJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.jokes.Jokes;
 import com.nighthawk.spring_portfolio.mvc.jokes.JokesJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.linkr.Company;
@@ -18,6 +15,8 @@ import com.nighthawk.spring_portfolio.mvc.linkr.Employee;
 import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeController;
 import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeRepository;
 import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeService;
+import com.nighthawk.spring_portfolio.mvc.linkrAuthentication.LinkrPAT;
+import com.nighthawk.spring_portfolio.mvc.linkrAuthentication.PatJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.note.Note;
 import com.nighthawk.spring_portfolio.mvc.person.Person;
 import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
