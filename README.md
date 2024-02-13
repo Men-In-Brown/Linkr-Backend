@@ -3,9 +3,9 @@
 
 # [Spring Portfolio Starter](https://nighthawkcodingsociety.com/projectsearch/details/Spring%20Portfolio%20Starter)
 
-- Runtime link: https://spring.nighthawkcodingsociety.com/
-- JWT Login: https://nighthawkcoders.github.io/APCSA/data/login
-- Jokes endpoint: https://spring.nighthawkcodingsociety.com/api/jokes/
+- Frontend link: [https://spring.nighthawkcodingsociety.com/](https://men-in-brown.github.io/Linkr-Frontend/)
+- Backend Link: 
+- Companies Panel
 
 
 
