@@ -63,14 +63,17 @@ public class EmployeeController {
         log.info("Employee added successfully: {}", addedEmployee);
         Person p6 = new Person();
         p6.setName("No Name");
-        p6.setEmail(addedEmployee.getEmail());
-        p6.setPassword(addedEmployee.getPassword());
+        p6.setEmail(employee.getEmail());
+        p6.setPassword(employee.getPassword());
         try {
             Date d = new SimpleDateFormat("MM-dd-yyyy").parse("05-15-2007");
             p6.setDob(d);
         } catch (Exception e) {
         }
 
+        personDetailsService.save(p6);
+        
+        System.out.println("Hello");
         
         return new ResponseEntity<>(addedEmployee, HttpStatus.CREATED);
     }
