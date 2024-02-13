@@ -70,7 +70,6 @@ public class EmployeeController {
             p6.setDob(d);
         } catch (Exception e) {
         }
-
         
         return new ResponseEntity<>(addedEmployee, HttpStatus.CREATED);
     }
