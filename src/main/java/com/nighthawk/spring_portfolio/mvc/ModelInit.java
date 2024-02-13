@@ -18,8 +18,6 @@ import com.nighthawk.spring_portfolio.mvc.linkr.Employee;
 import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeController;
 import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeRepository;
 import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeService;
-import com.nighthawk.spring_portfolio.mvc.linkrAuthentication.LinkrPAT;
-import com.nighthawk.spring_portfolio.mvc.linkrAuthentication.PatJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.note.Note;
 import com.nighthawk.spring_portfolio.mvc.person.Person;
 import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
@@ -30,13 +28,11 @@ import java.util.List;
 @Configuration // Scans Application for ModelInit Bean, this detects CommandLineRunner
 public class ModelInit {  
     @Autowired JokesJpaRepository jokesRepo;
-    @Autowired NoteJpaRepository noteRepo;
     @Autowired PersonDetailsService personService;
     @Autowired PatJpaRepository patRepo;
     @Autowired EmployeeRepository employeeRepository;
     @Autowired CompanyRepository companyRepository;
-    @Autowired PersonDetailsService personService;
-    @Autowired PatJpaRepository patRepo;
+
 
     @Bean
     CommandLineRunner run() {  // The run() method will be executed after the application starts
@@ -81,15 +77,6 @@ public class ModelInit {
                     personService.save(person);  // save
                 }
             }
-
-            LinkrPAT[] list = LinkrPAT.init();
-            for(LinkrPAT l : list){
-                List<LinkrPAT> found = patRepo.findAllByUser(l.getUser());
-                if(found.size() == 0){
-                    patRepo.save(l);
-                }
-            }
-        
 
             LinkrPAT[] list = LinkrPAT.init();
             for(LinkrPAT l : list){
