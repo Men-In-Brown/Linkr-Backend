@@ -8,6 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.nighthawk.spring_portfolio.mvc.person.Person;
+import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,11 +24,13 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
     private final ModelMapper modelMapper;
+    private final PersonDetailsService personDetailsService;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService, ModelMapper modelMapper) {
+    public EmployeeController(EmployeeService employeeService, ModelMapper modelMapper, PersonDetailsService personDetailsService) {
         this.employeeService = employeeService;
         this.modelMapper = modelMapper;
+        this.personDetailsService = personDetailsService;
     }
 
     @GetMapping
@@ -53,6 +60,17 @@ public class EmployeeController {
         log.info("Attempting to add employee: {}", employee);
         Employee addedEmployee = employeeService.createEmployee(employee);
         log.info("Employee added successfully: {}", addedEmployee);
+        Person p6 = new Person();
+        p6.setName("No Name");
+        p6.setEmail(addedEmployee.getEmail());
+        p6.setPassword(addedEmployee.getPassword());
+        try {
+            Date d = new SimpleDateFormat("MM-dd-yyyy").parse("05-15-2007");
+            p6.setDob(d);
+        } catch (Exception e) {
+        }
+
+        
         return new ResponseEntity<>(addedEmployee, HttpStatus.CREATED);
     }
 

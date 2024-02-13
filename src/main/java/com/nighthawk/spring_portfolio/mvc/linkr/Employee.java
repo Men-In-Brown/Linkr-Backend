@@ -27,6 +27,14 @@ public class Employee {
     private String position;
     private String email;
     private String password;
+    private int followers;
+
+    // change to hashmap
+    private int ideas;
+    private int joined; 
+
+    private int investments; 
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
@@ -38,6 +46,9 @@ public class Employee {
         this.position = position;
         this.email = email;
         this.password = password;
+        this.ideas = 0;
+        this.joined = 0;
+        this.investments = 0;
     }
 
     public static Employee[] EmployeeInit(){
