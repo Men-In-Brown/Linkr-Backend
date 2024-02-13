@@ -66,9 +66,9 @@ public class CompanyController {
 
     @DeleteMapping("/{companyId}")
     public ResponseEntity<Void> deleteCompany(@PathVariable Long companyId) {
-        log.info("Attempting to delete company with ID: {}", companyId);
+        System.out.println("Attempting to delete company with ID: " + companyId);
         companyService.deleteCompany(companyId);
-        log.info("Company with ID {} deleted successfully", companyId);
+        System.out.println("Company with ID {} deleted successfully" + companyId);
         return ResponseEntity.noContent().build();
     }
 }

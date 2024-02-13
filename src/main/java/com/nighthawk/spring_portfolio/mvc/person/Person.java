@@ -107,6 +107,7 @@ public class Person {
     // Initialize static test data 
     public static Person[] init() {
 
+
         Person p6 = new Person();
         p6.setName("Tanay Patel");
         p6.setEmail("tpatel@gmail.com");
@@ -121,22 +122,24 @@ public class Person {
         p7.setName("Varaprasad Nibhanupudi");
         p7.setEmail("vnibhanupudi@gmail.com");
         p7.setPassword("123Vlu!");
+        p7.setName("Varaprasad Nibhanupudi");
+        p7.setEmail("vnibhanupudi@gmail.com");
+        p7.setPassword("123Vlu!");
         try {
             Date d = new SimpleDateFormat("MM-dd-yyyy").parse("12-10-2000");
             p7.setDob(d);
         } catch (Exception e) {
         }
 
-        Person p8= new Person();
+        Person p8 = new Person();
         p8.setName("Paaras Purohit");
         p8.setEmail("ppurohit@gmail.com");
         p8.setPassword("123Paaras!");
         try {
-            Date d = new SimpleDateFormat("MM-dd-yyyy").parse("12-11-2012");
+            Date d = new SimpleDateFormat("MM-dd-yyyy").parse("12-10-2000");
             p8.setDob(d);
         } catch (Exception e) {
         }
-
         // Array definition and data initialization
         Person persons[] = {p6, p7, p8};
         return(persons);

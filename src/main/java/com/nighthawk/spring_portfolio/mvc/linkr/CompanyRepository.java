@@ -15,4 +15,7 @@ public interface CompanyRepository extends JpaRepository<Company, Long> {
     @Query(value = "SELECT coalesce(max(id), 0) FROM Company")
      Long getMaxId();
 
+    List<Company> findCompanyByNameIgnoreCase(String name);
+
+
 }
