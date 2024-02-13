@@ -50,6 +50,7 @@ public class EmployeeController {
 
     @PostMapping
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+        
         log.info("Attempting to add employee: {}", employee);
         Employee addedEmployee = employeeService.createEmployee(employee);
         log.info("Employee added successfully: {}", addedEmployee);
