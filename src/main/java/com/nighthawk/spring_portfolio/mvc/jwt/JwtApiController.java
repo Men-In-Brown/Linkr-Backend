@@ -18,7 +18,7 @@ import com.nighthawk.spring_portfolio.mvc.person.Person;
 import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class JwtApiController {
 
 	@Autowired
