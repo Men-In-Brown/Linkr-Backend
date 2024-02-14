@@ -70,13 +70,10 @@ public class EmployeeController {
             p6.setDob(d);
         } catch (Exception e) {
         }
-<<<<<<< HEAD
-=======
 
         personDetailsService.save(p6);
         
         System.out.println("Hello");
->>>>>>> a672f158716e5a61071bcc26ee8501fca8e1a4f3
         
         return new ResponseEntity<>(addedEmployee, HttpStatus.CREATED);
     }
