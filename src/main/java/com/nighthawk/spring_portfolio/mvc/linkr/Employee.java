@@ -55,7 +55,8 @@ public class Employee {
         Employee e1 = new Employee("Tanay", "CEO", "tpatel@gmail.com", "123Tanay!");
         Employee e2 = new Employee("Varaprasad", "CTO", "vnibhanupudi@gmail.com", "123Vlu!");
         Employee e3 = new Employee("Paaras", "CFO", "ppurohit@gmail.com", "123Paras!");
-
+        Employee e4 = new Employee("Tobias", "Employee", "toby@gmail.com", "123Toby");
+        Employee e5 = new Employee("Hubert", "Employee", "hop@gmail.com", "123hop");
         Employee[] elist =  {e1, e2, e3};
         return elist;
     }

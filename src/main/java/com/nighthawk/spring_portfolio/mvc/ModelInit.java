@@ -6,8 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.nighthawk.spring_portfolio.mvc.jokes.Jokes;
-import com.nighthawk.spring_portfolio.mvc.jokes.JokesJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.linkr.Company;
 import com.nighthawk.spring_portfolio.mvc.linkr.CompanyRepository;
 import com.nighthawk.spring_portfolio.mvc.linkr.CompanyService;
@@ -26,7 +24,6 @@ import java.util.List;
 @Component
 @Configuration // Scans Application for ModelInit Bean, this detects CommandLineRunner
 public class ModelInit {  
-    @Autowired JokesJpaRepository jokesRepo;
     @Autowired PersonDetailsService personService;
     @Autowired PatJpaRepository patRepo;
     @Autowired EmployeeRepository employeeRepository;
@@ -35,15 +32,7 @@ public class ModelInit {
 
     @Bean
     CommandLineRunner run() {  // The run() method will be executed after the application starts
-        return args -> {
-
-            // Joke database is populated with starting jokes
-            String[] jokesArray = Jokes.init();
-            for (String joke : jokesArray) {
-                List<Jokes> jokeFound = jokesRepo.findByJokeIgnoreCase(joke);  // JPA lookup
-                if (jokeFound.size() == 0)
-                    jokesRepo.save(new Jokes(null, joke, 0, 0)); //JPA save
-            }
+        return args -> 
 
             Company[] clist = Company.companyInit();
             for (Company c : clist){

@@ -22,4 +22,15 @@ public class PatController {
         
         return "linkrPATs";
     }
+
+    @GetMapping("/api/pats")
+    public LinkrPAT getAPIByUser(String name){
+        List<LinkrPAT> allEmployees = PATRepository.findAll();
+        for (LinkrPAT l : allEmployees){
+            if(l.getUser().equals(name)){
+                return l;
+            }
+        }
+        return new LinkrPAT();
+    }
 }
