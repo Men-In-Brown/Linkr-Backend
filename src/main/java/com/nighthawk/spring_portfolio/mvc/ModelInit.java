@@ -32,7 +32,7 @@ public class ModelInit {
 
     @Bean
     CommandLineRunner run() {  // The run() method will be executed after the application starts
-        return args -> 
+        return args -> {
 
             Company[] clist = Company.companyInit();
             for (Company c : clist){
