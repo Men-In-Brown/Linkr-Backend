@@ -17,9 +17,12 @@ jobs:
       run: |
           docker-compose down
           git pull
+          echo "Build completed"
   deploy:
     needs: build
     runs-on: [aws-ec2]
     steps:
       - name: Deploy Using Docker
-        run: docker-compose up -d --build
+        run: |
+          echo "Deploy entered"
+          docker-compose up -d --build
