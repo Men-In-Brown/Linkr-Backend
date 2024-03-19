@@ -15,10 +15,7 @@ jobs:
         cache: maven
     - name: Build with Docker (Exact Deployment Steps)
       run: |
-          docker-compose down
-          docker ps
-          git pull
-          docker-compose up -d --build
+          echo "Build Occurred"
   deploy:
     needs: build
     runs-on: [aws-ec2]
@@ -26,4 +23,3 @@ jobs:
       - name: Deploy Using Docker
         run: |
           echo "Deploy entered"
-          docker-compose up -d --build
