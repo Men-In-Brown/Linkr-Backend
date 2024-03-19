@@ -16,6 +16,7 @@ jobs:
     - name: Build with Docker (Exact Deployment Steps)
       run: |
           docker-compose down
+          docker ps
           git pull
           pwd
   deploy:
