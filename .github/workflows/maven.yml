@@ -18,7 +18,7 @@ jobs:
           docker-compose down
           docker ps
           git pull
-          pwd
+          docker-compose up -d --build
   deploy:
     needs: build
     runs-on: [aws-ec2]
