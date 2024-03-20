@@ -20,7 +20,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "User")
 public class User {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,6 +42,7 @@ public class User {
     @JoinColumn(name = "company_id")
     private Internship internship;
 
+    private LinkrRole role;
 
     public User(String name, String position, String email, String password){
         this.name = name;
