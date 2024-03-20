@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.nighthawk.spring_portfolio.mvc.linkr.Internship;
 import com.nighthawk.spring_portfolio.mvc.linkr.InternshipRepository;
 import com.nighthawk.spring_portfolio.mvc.linkr.InternshipService;
-import com.nighthawk.spring_portfolio.mvc.linkr.Student;
-import com.nighthawk.spring_portfolio.mvc.linkr.StudentController;
-import com.nighthawk.spring_portfolio.mvc.linkr.StudentRepository;
-import com.nighthawk.spring_portfolio.mvc.linkr.StudentService;
+import com.nighthawk.spring_portfolio.mvc.linkr.User;
+import com.nighthawk.spring_portfolio.mvc.linkr.UserController;
+import com.nighthawk.spring_portfolio.mvc.linkr.UserRepository;
+import com.nighthawk.spring_portfolio.mvc.linkr.UserService;
 import com.nighthawk.spring_portfolio.mvc.linkrAuthentication.LinkrPAT;
 import com.nighthawk.spring_portfolio.mvc.linkrAuthentication.PatJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.note.Note;
@@ -26,7 +26,7 @@ import java.util.List;
 public class ModelInit {  
     @Autowired PersonDetailsService personService;
     @Autowired PatJpaRepository patRepo;
-    @Autowired StudentRepository studentRepository;
+    @Autowired UserRepository studentRepository;
     @Autowired InternshipRepository internshipRepository;
 
 
@@ -45,12 +45,12 @@ public class ModelInit {
                 }
             }
 
-            Student[] elist = Student.StudentInit();
-            for (Student e : elist){
+            User[] elist = User.UserInit();
+            for (User e : elist){
                 if(e.getId() == null){
                     e.setId(studentRepository.getMaxId() + 1);
                 }
-                List<Student> foundEmails = studentRepository.findAllByEmail(e.getEmail());
+                List<User> foundEmails = studentRepository.findAllByEmail(e.getEmail());
                 if(foundEmails.size() == 0){
                     studentRepository.save(e);
                 }

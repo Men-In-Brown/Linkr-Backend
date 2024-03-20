@@ -7,14 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StudentRepository extends JpaRepository<Student, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    List<Student> findAllById(Long id);
+    List<User> findAllById(Long id);
 
-    @Query(value = "SELECT coalesce(max(id), 0) FROM Student")
+    @Query(value = "SELECT coalesce(max(id), 0) FROM User")
      Long getMaxId();
 
-    Student findByEmail(String email);
+    User findByEmail(String email);
 
-    List<Student> findAllByEmail(String email);
+    List<User> findAllByEmail(String email);
 }

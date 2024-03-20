@@ -3,7 +3,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.nighthawk.spring_portfolio.mvc.linkr.Student;
+import com.nighthawk.spring_portfolio.mvc.linkr.User;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -55,7 +55,7 @@ public class LinkrJwtTokenUtil {
 	}
 
 	//generate token for user
-	public String generateToken(Student userDetails) {
+	public String generateToken(User userDetails) {
 		Map<String, Object> claims = new HashMap<>();
 		return doGenerateToken(claims, userDetails.getEmail());
 	}

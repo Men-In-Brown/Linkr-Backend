@@ -18,50 +18,50 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping("/api/student") // Base URL for all endpoints in this controller
-public class StudentController {
+public class UserController {
 
-    private final StudentService StudentService; // Service for student-related operations
+    private final UserService UserService; // Service for student-related operations
     private final ModelMapper modelMapper; // For entity-to-DTO mapping
     private final PersonDetailsService personDetailsService; // Service for managing person details
 
     @Autowired
-    public StudentController(StudentService StudentService, ModelMapper modelMapper, PersonDetailsService personDetailsService) {
-        this.StudentService = StudentService;
+    public UserController(UserService UserService, ModelMapper modelMapper, PersonDetailsService personDetailsService) {
+        this.UserService = UserService;
         this.modelMapper = modelMapper;
         this.personDetailsService = personDetailsService;
     }
 
-    // Endpoint to get all Student
+    // Endpoint to get all User
     @GetMapping
-    public ResponseEntity<List<StudentDTO>> getAllStudent() {
-        // Retrieving all Student and mapping them to DTOs
-        List<Student> Student = StudentService.getAllStudent();
-        List<StudentDTO> studentDTOs = Student.stream()
-                .map(student -> modelMapper.map(student, StudentDTO.class))
+    public ResponseEntity<List<UserDTO>> getAllUser() {
+        // Retrieving all User and mapping them to DTOs
+        List<User> User = UserService.getAllUser();
+        List<UserDTO> studentDTOs = User.stream()
+                .map(student -> modelMapper.map(student, UserDTO.class))
                 .collect(Collectors.toList());
         return new ResponseEntity<>(studentDTOs, HttpStatus.OK); // Returning DTO list with OK status
     }
 
     // Endpoint to get an student by their ID
     @GetMapping("/{studentId}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Long studentId) {
+    public ResponseEntity<User> getUserById(@PathVariable Long studentId) {
         log.info("Attempting to retrieve student with ID: {}", studentId); // Logging the attempt
-        Optional<Student> student = StudentService.getStudentById(studentId); // Retrieving student by ID
+        Optional<User> student = UserService.getUserById(studentId); // Retrieving student by ID
         if (student.isPresent()) { // If student is found
             log.info("Found student with ID: {}", studentId); // Logging successful retrieval
             return ResponseEntity.ok().body(student.get()); // Returning student with OK status
         } else { // If student is not found
-            log.warn("Student with ID {} not found", studentId); // Logging warning for not found
+            log.warn("User with ID {} not found", studentId); // Logging warning for not found
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Returning NOT_FOUND status
         }
     }
 
     // Endpoint to add a new student
     @PostMapping
-    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
+    public ResponseEntity<User> addUser(@RequestBody User student) {
         log.info("Attempting to add student: {}", student); // Logging the attempt
-        Student addedStudent = StudentService.createStudent(student); // Creating the student
-        log.info("Student added successfully: {}", addedStudent); // Logging successful addition
+        User addedUser = UserService.createUser(student); // Creating the student
+        log.info("User added successfully: {}", addedUser); // Logging successful addition
         
         // Creating a Person object and saving person details
         Person p6 = new Person();
@@ -77,15 +77,15 @@ public class StudentController {
         
         System.out.println("Hello"); // Printing a message
         
-        return new ResponseEntity<>(addedStudent, HttpStatus.CREATED); // Returning the added student with CREATED status
+        return new ResponseEntity<>(addedUser, HttpStatus.CREATED); // Returning the added student with CREATED status
     }
 
     // Endpoint to delete an student by their ID
     @DeleteMapping("/{studentId}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable Long studentId) {
+    public ResponseEntity<Void> deleteUser(@PathVariable Long studentId) {
         log.info("Attempting to delete student with ID: {}", studentId); // Logging the attempt
-        StudentService.deleteStudent(studentId); // Deleting the student
-        log.info("Student with ID {} deleted successfully", studentId); // Logging successful deletion
+        UserService.deleteUser(studentId); // Deleting the student
+        log.info("User with ID {} deleted successfully", studentId); // Logging successful deletion
         return ResponseEntity.noContent().build(); // Returning NO_CONTENT status
     }
 }

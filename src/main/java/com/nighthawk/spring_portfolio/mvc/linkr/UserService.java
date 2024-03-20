@@ -9,27 +9,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentService {
+public class UserService {
 
-    private final StudentRepository studentRepository;
+    private final UserRepository studentRepository;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository) {
+    public UserService(UserRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
     // Method to retrieve all students
-    public List<Student> getAllStudent() {
+    public List<User> getAllUser() {
         return studentRepository.findAll();
     }
 
     // Method to retrieve an student by their ID
-    public Optional<Student> getStudentById(Long studentId) {
+    public Optional<User> getUserById(Long studentId) {
         return studentRepository.findById(studentId);
     }
 
     // Method to create a new student
-    public Student createStudent(Student student) {
+    public User createUser(User student) {
         // If the student ID is not provided, generate a new ID
         if (student.getId() == null) {
             student.setId(generateNextId());
@@ -38,17 +38,17 @@ public class StudentService {
     }
 
     // Method to delete an student by their ID
-    public void deleteStudent(Long studentId) {
+    public void deleteUser(Long studentId) {
         studentRepository.deleteById(studentId);
     }
 
     // Method to load user by username (email) for authentication purposes
-    public Student loadUserByUsername(String email) throws UsernameNotFoundException {
-        Student student = studentRepository.findByEmail(email); // Retrieve user by email from the database
+    public User loadUserByUsername(String email) throws UsernameNotFoundException {
+        User student = studentRepository.findByEmail(email); // Retrieve user by email from the database
         if (student == null) { // If user is not found
             throw new UsernameNotFoundException("User not found with username: " + email); // Throw exception
         }
-        // Assuming Student implements UserDetails
+        // Assuming User implements UserDetails
         return student;
     }
 

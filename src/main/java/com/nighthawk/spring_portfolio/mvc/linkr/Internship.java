@@ -36,7 +36,7 @@ public class Internship {
     // private int investments;
 
     @OneToMany(mappedBy = "internship", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Student> students = new HashSet<>();
+    private Set<User> students = new HashSet<>();
 
 
     public Internship(String name, String mission, String location, String industry, String ceo){
