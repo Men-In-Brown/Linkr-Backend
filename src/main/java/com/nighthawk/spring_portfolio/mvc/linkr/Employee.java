@@ -9,17 +9,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter; 
 
+@Data
 @Entity
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Student")
-public class Student {
+@Table(name = "employee")
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,10 +38,10 @@ public class Student {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
-    private Internship internship;
+    private Company company;
 
 
-    public Student(String name, String position, String email, String password){
+    public Employee(String name, String position, String email, String password){
         this.name = name;
         this.position = position;
         this.email = email;
@@ -53,13 +51,13 @@ public class Student {
         this.investments = 0;
     }
 
-    public static Student[] StudentInit(){
-        Student e1 = new Student("Tanay", "CEO", "tpatel@gmail.com", "123Tanay!");
-        Student e2 = new Student("Varaprasad", "CTO", "vnibhanupudi@gmail.com", "123Vlu!");
-        Student e3 = new Student("Paaras", "CFO", "ppurohit@gmail.com", "123Paras!");
-        Student e4 = new Student("Tobias", "Student", "toby@gmail.com", "123Toby");
-        Student e5 = new Student("Hubert", "Student", "hop@gmail.com", "123hop");
-        Student[] elist =  {e1, e2, e3, e4, e5};
+    public static Employee[] EmployeeInit(){
+        Employee e1 = new Employee("Tanay", "CEO", "tpatel@gmail.com", "123Tanay!");
+        Employee e2 = new Employee("Varaprasad", "CTO", "vnibhanupudi@gmail.com", "123Vlu!");
+        Employee e3 = new Employee("Paaras", "CFO", "ppurohit@gmail.com", "123Paras!");
+        Employee e4 = new Employee("Tobias", "Employee", "toby@gmail.com", "123Toby");
+        Employee e5 = new Employee("Hubert", "Employee", "hop@gmail.com", "123hop");
+        Employee[] elist =  {e1, e2, e3};
         return elist;
     }
 }
