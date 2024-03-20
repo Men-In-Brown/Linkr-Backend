@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class Main {
 
-    
     // Starts a spring application as a stand-alone application from the main method
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
