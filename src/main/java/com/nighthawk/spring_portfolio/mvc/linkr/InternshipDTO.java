@@ -1,9 +1,9 @@
 package com.nighthawk.spring_portfolio.mvc.linkr;
 
-// Data Transfer Object (DTO) representing a Company entity,
+// Data Transfer Object (DTO) representing a Internship entity,
 // used for transferring data between the front-end and back-end layers.
 
-public class CompanyDTO {
+public class InternshipDTO {
     private Long id;
     private String name;
     private String mission;
@@ -15,11 +15,11 @@ public class CompanyDTO {
     private int foundedYear;
     private String ceo;
 
-    public CompanyDTO() {
+    public InternshipDTO() {
         // Default constructor
     }
 
-    public CompanyDTO(Long id, String name, String mission, String location, String industry, int size, String description, String website, int foundedYear, String ceo) {
+    public InternshipDTO(Long id, String name, String mission, String location, String industry, int size, String description, String website, int foundedYear, String ceo) {
         this.id = id;
         this.name = name;
         this.mission = mission;
