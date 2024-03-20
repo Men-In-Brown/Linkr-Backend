@@ -6,13 +6,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.nighthawk.spring_portfolio.mvc.linkr.Company;
-import com.nighthawk.spring_portfolio.mvc.linkr.CompanyRepository;
-import com.nighthawk.spring_portfolio.mvc.linkr.CompanyService;
-import com.nighthawk.spring_portfolio.mvc.linkr.Employee;
-import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeController;
-import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeRepository;
-import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeService;
+import com.nighthawk.spring_portfolio.mvc.linkr.Internship;
+import com.nighthawk.spring_portfolio.mvc.linkr.InternshipRepository;
+import com.nighthawk.spring_portfolio.mvc.linkr.InternshipService;
+import com.nighthawk.spring_portfolio.mvc.linkr.Student;
+import com.nighthawk.spring_portfolio.mvc.linkr.StudentController;
+import com.nighthawk.spring_portfolio.mvc.linkr.StudentRepository;
+import com.nighthawk.spring_portfolio.mvc.linkr.StudentService;
 import com.nighthawk.spring_portfolio.mvc.linkrAuthentication.LinkrPAT;
 import com.nighthawk.spring_portfolio.mvc.linkrAuthentication.PatJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.note.Note;
@@ -26,33 +26,33 @@ import java.util.List;
 public class ModelInit {  
     @Autowired PersonDetailsService personService;
     @Autowired PatJpaRepository patRepo;
-    @Autowired EmployeeRepository employeeRepository;
-    @Autowired CompanyRepository companyRepository;
+    @Autowired StudentRepository studentRepository;
+    @Autowired InternshipRepository internshipRepository;
 
 
     @Bean
     CommandLineRunner run() {  // The run() method will be executed after the application starts
         return args -> {
 
-            Company[] clist = Company.companyInit();
-            for (Company c : clist){
+            Internship[] clist = Internship.internshipInit();
+            for (Internship c : clist){
                 if(c.getId() == null){
-                    c.setId(companyRepository.getMaxId() + 1);
+                    c.setId(internshipRepository.getMaxId() + 1);
                 }
-                List<Company> found = companyRepository.findCompanyByNameIgnoreCase(c.getName());
+                List<Internship> found = internshipRepository.findInternshipByNameIgnoreCase(c.getName());
                 if (found.size() == 0){
-                    companyRepository.save(c);
+                    internshipRepository.save(c);
                 }
             }
 
-            Employee[] elist = Employee.EmployeeInit();
-            for (Employee e : elist){
+            Student[] elist = Student.StudentInit();
+            for (Student e : elist){
                 if(e.getId() == null){
-                    e.setId(employeeRepository.getMaxId() + 1);
+                    e.setId(studentRepository.getMaxId() + 1);
                 }
-                List<Employee> foundEmails = employeeRepository.findAllByEmail(e.getEmail());
+                List<Student> foundEmails = studentRepository.findAllByEmail(e.getEmail());
                 if(foundEmails.size() == 0){
-                    employeeRepository.save(e);
+                    studentRepository.save(e);
                 }
             }
 

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.nighthawk.spring_portfolio.mvc.linkr.Employee;
-import com.nighthawk.spring_portfolio.mvc.linkr.EmployeeService;
+import com.nighthawk.spring_portfolio.mvc.linkr.Student;
+import com.nighthawk.spring_portfolio.mvc.linkr.StudentService;
 import com.nighthawk.spring_portfolio.mvc.person.Person;
 import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
     
@@ -31,15 +31,15 @@ public class LinkrJWTApiController {
     private LinkrJwtTokenUtil jwtTokenUtil; // Utility class for generating JWT tokens
 
     @Autowired
-    private EmployeeService employeeService; // Service for managing employee-related operations
+    private StudentService employeeService; // Service for managing employee-related operations
 
     // Endpoint for authenticating users and generating JWT tokens
     @PostMapping("/linkrAuthenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody Employee authenticationRequest) throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody Student authenticationRequest) throws Exception {
         // Authenticate user credentials
         authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
         // Load user details based on the provided username (email)
-        final Employee userDetails = employeeService.loadUserByUsername(authenticationRequest.getEmail());
+        final Student userDetails = employeeService.loadUserByUsername(authenticationRequest.getEmail());
         // Generate JWT token for the authenticated user
         final String token = jwtTokenUtil.generateToken(userDetails);
         // Create HTTP cookie containing the JWT token

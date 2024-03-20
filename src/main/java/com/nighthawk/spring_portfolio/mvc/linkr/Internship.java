@@ -16,9 +16,9 @@ import jakarta.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "company")
+@Table(name = "internship")
 @NoArgsConstructor
-public class Company {
+public class Internship {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,14 +32,14 @@ public class Company {
     private String description; // set to null, can be replaced
     private String website; // set to null, can be replaced
     private int foundedYear; // automated
-    private String ceo; // automated (employee creating company)
+    private String ceo; // automated (student creating internship)
     // private int investments;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Employee> employees = new HashSet<>();
+    @OneToMany(mappedBy = "internship", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Student> students = new HashSet<>();
 
 
-    public Company(String name, String mission, String location, String industry, String ceo){
+    public Internship(String name, String mission, String location, String industry, String ceo){
         // Users Set
         this.name = name;
         this.mission = mission;
@@ -56,11 +56,11 @@ public class Company {
         this.website = null;
     }
 
-    public static Company[] companyInit(){
-        Company c1 = new Company("Name 1", "To Name", "California", "Tech", "None");
-        Company c2 = new Company("Name 2", "To not name", "India", "Hosptality", "Tanay");
-        Company c3 = new Company("Name 3", "That is the question", "Shanghai", "Tax Fraud", "Paaras");
-        Company[] clist = {c1, c2, c3};
+    public static Internship[] internshipInit(){
+        Internship c1 = new Internship("Name 1", "To Name", "California", "Tech", "None");
+        Internship c2 = new Internship("Name 2", "To not name", "India", "Hosptality", "Tanay");
+        Internship c3 = new Internship("Name 3", "That is the question", "Shanghai", "Tax Fraud", "Paaras");
+        Internship[] clist = {c1, c2, c3};
         return clist;
     }
 }
