@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.nighthawk.spring_portfolio.mvc.person.Person;
 import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
@@ -33,6 +34,7 @@ public class UserController {
 
     // Endpoint to get all User
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UserDTO>> getAllUser() {
         // Retrieving all User and mapping them to DTOs
         List<User> User = UserService.getAllUser();
@@ -44,6 +46,7 @@ public class UserController {
 
     // Endpoint to get an student by their ID
     @GetMapping("/{studentId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('TEACHER')or hasRole('EMPLOYER')")
     public ResponseEntity<User> getUserById(@PathVariable Long studentId) {
         log.info("Attempting to retrieve student with ID: {}", studentId); // Logging the attempt
         Optional<User> student = UserService.getUserById(studentId); // Retrieving student by ID
@@ -82,6 +85,7 @@ public class UserController {
 
     // Endpoint to delete an student by their ID
     @DeleteMapping("/{studentId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STUDENT')")
     public ResponseEntity<Void> deleteUser(@PathVariable Long studentId) {
         log.info("Attempting to delete student with ID: {}", studentId); // Logging the attempt
         UserService.deleteUser(studentId); // Deleting the student

@@ -42,7 +42,7 @@ public class User {
     @JoinColumn(name = "company_id")
     private Internship internship;
 
-    private LinkrRole role;
+    private UserRoles role;
 
     public User(String name, String position, String email, String password){
         this.name = name;

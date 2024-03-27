@@ -3,11 +3,12 @@ package com.nighthawk.spring_portfolio.mvc.linkr;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import lombok.extern.slf4j.Slf4j;
 
 // Using lombok to automatically generate a logger
@@ -37,6 +37,7 @@ public class InternshipController {
 
     // Endpoint to get all companies
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<InternshipDTO>> getAllCompanies() {
         List<Internship> companies = com.nighthawk.spring_portfolio.mvc.linkr.InternshipService.getAllCompanies(); // Retrieve companies from the service
         List<InternshipDTO> internshipDTOs = companies.stream()
@@ -61,6 +62,7 @@ public class InternshipController {
 
     // Endpoint to add a new internship
     @PostMapping
+    @PostAuthorize("hasRole('ADMIN') or hasRole('EMPLOYER')")
     public ResponseEntity<Internship> addinternship(@RequestBody Internship internship) {
         log.info("Attempting to add internship: {}", internship); // Log the attempt
         Internship addedinternship = InternshipService.createInternship(internship); // Create the internship
@@ -70,9 +72,10 @@ public class InternshipController {
 
     // Endpoint to delete a internship by its ID
     @DeleteMapping("/{internshipId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('EMPLOYER')")
     public ResponseEntity<Void> deleteinternship(@PathVariable Long internshipId) {
         System.out.println("Attempting to delete internship with ID: " + internshipId); // Log the attempt
-        InternshipService.deleteInternship(internshipId); // Delete the internship
+        com.nighthawk.spring_portfolio.mvc.linkr.InternshipService.deleteInternship(internshipId); // Delete the internship
         System.out.println("internship with ID {} deleted successfully" + internshipId); // Log successful deletion
         return ResponseEntity.noContent().build(); // Return NO_CONTENT status
     }
